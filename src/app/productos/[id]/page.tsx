@@ -11,7 +11,6 @@ import Image from 'next/image';
 const ProductPage = () => {
   const params = useParams();
   const slug = params.id;
-  console.log("slug", slug)
   const [product, setProduct] = useState<ProductType | null>(null)
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,7 +26,6 @@ const ProductPage = () => {
     fetchProducts()
   }, [slug])
   
-  console.log("WIth id ", slug, product)
   return (
     <Layout isHome={false}>
       

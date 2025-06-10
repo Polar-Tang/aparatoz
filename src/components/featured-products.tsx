@@ -2,12 +2,13 @@
 
 import ProductCard from "@/components/product-card"
 import { Button } from "@/components/ui/button"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "./products";
 
 export default function FeaturedProducts() {
   const {changeProducts} = useContext(ProductContext);
   const [showAll, setShowAll] = useState<boolean>(false)
+  const [productsToShow, setproductsToShow] = useState(0)
   const productsFitScreenQuatity = () => {
     const md = 768
     const sm = 640
@@ -26,7 +27,11 @@ export default function FeaturedProducts() {
 
     }
   }
-  const productsToShow = productsFitScreenQuatity()
+  useEffect(() => {
+   const quantity = productsFitScreenQuatity()
+   setproductsToShow(quantity || 8)
+  }, [])
+  
 
   return (
     <div className="bg-white py-16">
