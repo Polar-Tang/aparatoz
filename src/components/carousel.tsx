@@ -19,12 +19,12 @@ export function CarouselDemo() {
   return (
     <Carousel className="w-full max-w-xs">
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {images.map((image, index) => (
           <CarouselItem key={index}>
             <div className="">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-0">
-                  <Image src={images[index] ? images[index] : "/placeholder_im.png" } alt="Imagen de carousel" width={100} height={100} className="text-4xl font-semibold w-full h-full obect-cover object-fit w-[100px] h-[100px]"/>
+                  <Image src={image ? image : "/placeholder_im.png" } alt="Imagen de carousel" width={100} height={100} className="text-4xl font-semibold w-full h-full obect-cover object-fit w-[100px] h-[100px]"/>
                 </CardContent>
               </Card>
             </div>

@@ -5,7 +5,7 @@ export default function CallToAction() {
     <div className="bg-navy-blue py-16">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-white mb-4">Ready to Give Your Pet the Best?</h2>
-        <p className="text-blue-100 max-w-2xl mx-auto mb-8">
+        <p className="text-blue-500 max-w-2xl mx-auto mb-8">
           Join thousands of happy pet owners who trust our products for their furry friends.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

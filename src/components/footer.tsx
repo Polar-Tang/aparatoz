@@ -65,12 +65,14 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />
-                <span>123 Pet Street, Anytown, USA</span>
+                <span>Buenos Aires, Argentina</span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" />
+                {/* num rodri */}
                 <span>(123) 456-7890</span>
               </li>
+              {/* mail */}
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
                 <span>info@petcare.com</span>
@@ -78,6 +80,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Crear un db collection */}
           <div>
             <h3 className="text-white text-lg font-bold mb-4">Newsletter</h3>
             <p className="mb-4">Subscribe to our newsletter for the latest updates and offers.</p>

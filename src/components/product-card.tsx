@@ -13,21 +13,21 @@ export default function ProductCard({product}: {product: ProductType}) {
           <Image
             src={product.image}
             alt={product.title}
-            width={120}
+            width={240}
             height={180}
-            className="object-fit w-[120px] h-[180px]"
+            className="object-fit w-[200px] h-[180px]"
             unoptimized
           />
         </div>
 
         <div className="text-center space-y-1">
-          <h3 className="text-lg text-indigo-900 font-medium h-20">
+          <h3 className="text-2xl text-indigo-900 font-medium h-20">
             {product.title}
           </h3>
             <br />
 
-          <div className="flex items-center justify-center gap-2 mt-2">
-            <span className="text-lg font-bold">${product.price}</span>
+          <div className="flex items-center justify-center -mt-10 md:gap-2 md:mt-2">
+            <span className="text-lg font-bold">{product.price}</span>
             <span className="text-sm text-gray-500 line-through">${Math.round(product.price*2-(product.price*0.2))}</span>
           </div>
 

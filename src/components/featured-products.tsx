@@ -37,14 +37,14 @@ export default function FeaturedProducts() {
     <div className="bg-white py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Equipos Disponibles</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our most popular pet care products, loved by pets and their owners alike.
+            Adquiri el próximo equipo para tu centro de estética al mejor precio.
           </p>
         </div>
 
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="productos">
+          <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-54 lg:grid-cols-4 lg:gap-2" id="productos">
             {changeProducts.slice(0, showAll ? changeProducts.length : productsToShow).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

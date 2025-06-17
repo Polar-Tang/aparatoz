@@ -21,7 +21,8 @@ export function ProductsProvider({children}: {children: ReactNode}) {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch("https://fakestoreapi.com/products")
+        // const res = await fetch("https://fakestoreapi.com/products")
+        const res = await fetch("/productos_mock.json")
         const data = await res.json()
         setFeaturedProducts(data)
         setChangeProducts(data)

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Haifu 7",
+    "description": "NUEVO LIPOSONIX 20 PRO\nÚltima tecnología en Liposonix alcanzando profundidades de 6mm/8mm/10mm/13mm/16mm/18mm/20mm\n✅STOCK. ENTREGA INMEDIATA",
+    "category": "haifu",
+    "image": "/haifu/haifu_7/haifu7_1.jpg",
+    "images": [
+      "/haifu/haifu_7/haifu7_1.jpg",
+      "/haifu/haifu_7/haifu7_2.jpg",
+      "/haifu/haifu_7/haifu7_3.jpg",
+      "/haifu/haifu_7/haifu7_4.jpg",
+      "/haifu/haifu_7/haifu7_5.jpg",
+      "/haifu/haifu_7/haifu7_6.jpg"
+    ],
+    "price": 2500
+  },
+  {
+    "id": 2,
+    "title": "Haifu 22",
+    "description": "",
+    "category": "haifu",
+    "image": "/haifu/haifu22/haifu22_1.jpg",
+    "price": 3200
+  },
+  {
+    "id": 3,
+    "title": "Linfonix",
+    "description": "",
+    "category": "linfonix",
+    "image": "/haifu/limposoni/linposonix_3.jpg",
+    "price": 1800
+  },
+  {
+    "id": 4,
+    "title": "Linfonix",
+    "description": "",
+    "category": "linfonix",
+    "image": "/haifu/linposonix_20/linpozonix_20_2.jpg",
+    "price": 2100
+  }
+]
