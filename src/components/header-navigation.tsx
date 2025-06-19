@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import { Search, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -8,18 +8,57 @@ import { ProductContext } from "./products"
 import { CartSheet } from "./cart-sheet"
 import { ProductType } from "@/types/product-type"
 import { CartContext } from "@/types/context-types"
+import { CartItem } from "@/types/cart-type"
 
 export const CartProctContext = createContext({} as CartContext);
 
 export function ProductsCartProvider({ children }: { children: ReactNode }) {
   const [productsCartState, setproductsCartState] = useState([] as ProductType[])
-    const [CartLen, setCartLen] = useState(0)
+  const { featuredProducts } = useContext(ProductContext)
+  const [CartLen, setCartLen] = useState(0)
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
 
+        const data = fetch("/api/cart", {
+          credentials: "include"
+        })
+        const res = await (await data).json()
+        if (!res.success) {
+          return null
+        }
+        console.log("The response frfom trhe backend ", res)
+        console.log("fEATURED PRODUCT ARE: ", featuredProducts)
+        const items = res.item as CartItem[]
+        const productsCart: ProductType[] = []
+        if (items) {
+          items.forEach((productCart, i) => {
+            const product = featuredProducts.find((p) => p.id === productCart.product_id)
+            console.log("Rpoduct found: ", product)
+            if (product) {
+              for (let q = 0; q < productCart.quantity; q++) {
+                productsCart.push(product)
+                console.log("Add " + i)
+              }
+            }
+          })
+
+        }
+        console.log("Prodcart", productsCart)
+        setproductsCartState(productsCart)
+        setCartLen(productsCart.length)
+        localStorage.setItem("cart", JSON.stringify(productsCart))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchCart()
+  }, [featuredProducts])
   return (
     <CartProctContext.Provider value={{
       productsCartState,
       setproductsCartState,
-      CartLen, 
+      CartLen,
       setCartLen
     }}>
       {children}
@@ -31,11 +70,14 @@ export default function Header({ isHome }: { isHome: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { setChangeProducts, featuredProducts } = useContext(ProductContext)
 
+
+
   const search = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const newProducts = featuredProducts.filter((p) => String(p.title).toLocaleLowerCase().includes(String(target.value).toLocaleLowerCase()))
     setChangeProducts(newProducts)
   }
+
 
 
   return (
