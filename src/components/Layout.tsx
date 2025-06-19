@@ -1,7 +1,7 @@
 
 import { ReactNode } from "react";
 import Footer from "./footer";
-import HomeHeader from "./home-header";
+import Header from "./header-navigation";
 
 
 interface LayoutProps {
@@ -13,7 +13,7 @@ export default function Layout({ children, isHome }: LayoutProps) {
   return (
     <main className="min-h-screen">
       <div className="relative">
-        <HomeHeader isHome={isHome} />
+        <Header isHome={isHome} />
       </div>
       
       {children}

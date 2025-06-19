@@ -4,6 +4,7 @@ import ProductCard from "@/components/product-card"
 import { Button } from "@/components/ui/button"
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "./products";
+import { CartProctContext } from "./header-navigation";
 
 export default function FeaturedProducts() {
   const {changeProducts} = useContext(ProductContext);
@@ -32,7 +33,9 @@ export default function FeaturedProducts() {
    setproductsToShow(quantity || 8)
   }, [])
   
-
+   const {productsCartState} = useContext(CartProctContext)
+  
+  console.log("The procut are: ",productsCartState)
   return (
     <div className="bg-white py-16">
       <div className="container mx-auto px-4">

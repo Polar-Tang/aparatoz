@@ -1,13 +1,12 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight, Package, CreditCard, Truck } from 'lucide-react';
+import { Package, CreditCard, Truck } from 'lucide-react';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
 import { useParams } from 'next/navigation'
 import { ProductType } from '@/types/product-type';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import getProductById from '@/lib/get-product-by-id';
 import { CarouselComponent } from './Carousel';
 

@@ -28,6 +28,8 @@ type CarouselContextProps = {
   scrollPrev: () => void
   scrollNext: () => void
   canScrollPrev: boolean
+  currentIndex: number, 
+  setcurrentIndex: React.Dispatch<React.SetStateAction<number>>
   canScrollNext: boolean
 } & CarouselProps
 
@@ -64,6 +66,8 @@ function Carousel({
   const [canScrollNext, setCanScrollNext] = React.useState(false)
   const [progress, setProgress] = React.useState(0)
   const [isPaused, setIsPaused] = React.useState(false)
+  const [currentIndex, setcurrentIndex] = React.useState<number>(0)
+
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return
@@ -71,13 +75,15 @@ function Carousel({
     setCanScrollNext(api.canScrollNext())
   }, [])
 
-  const scrollPrev = React.useCallback(() => {
+   const scrollPrev = React.useCallback(() => {
     api?.scrollPrev()
+    setcurrentIndex((prev) => prev = prev - 1)
     setProgress(0) // Reset progress when manually scrolling
   }, [api])
 
   const scrollNext = React.useCallback(() => {
     api?.scrollNext()
+    setcurrentIndex((prev) => prev = prev + 1)
     setProgress(0) // Reset progress when manually scrolling
   }, [api])
 
@@ -113,21 +119,21 @@ function Carousel({
   // Auto-advance functionality with progress bar
   React.useEffect(() => {
     if (!api || isPaused) return
-
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
-          // Check if we can scroll to next, otherwise go to first slide
-          if (canScrollNext) {
-            api.scrollNext()
+          if (canScrollNext ) {
+            scrollNext()
           } else {
-            api.scrollTo(0) // Loop back to first slide
+            api.scrollTo(0) 
+            setcurrentIndex(0)
+
           }
           return 0
         }
-        return prev + (100 / (autoAdvanceInterval / 100)) // Update progress smoothly
+        return prev + (100 / (autoAdvanceInterval / 100)) 
       })
-    }, 100) // Update progress every 100ms for smooth animation
+    }, 100)
 
     return () => clearInterval(interval)
   }, [api, canScrollNext, autoAdvanceInterval, isPaused])
@@ -148,11 +154,13 @@ function Carousel({
         api: api,
         opts,
         orientation:
-          orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+        orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
         scrollPrev,
         scrollNext,
         canScrollPrev,
         canScrollNext,
+        currentIndex, 
+        setcurrentIndex
       }}
     >
       <div

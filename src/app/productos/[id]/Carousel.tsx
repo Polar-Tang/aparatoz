@@ -8,8 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import Image from "next/image"
+import ImgComponent from "@/components/img-componennt"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -263,7 +262,7 @@ export function CarouselComponent({ images }: { images: string[] }) {
                 {images.map((image, index) => (
                     <CarouselItem key={index} className="aspect-square flex items-center justify-center">
 
-                        <Image src={image ? image : "/placeholder_im.png"} alt="Imagen de carousel" width={100} height={100} className="text-4xl font-semibold w-full h-full obect-cover object-cover w-[100px] h-[100px]" />
+                        <ImgComponent src={image ? image : "/placeholder_im.png"} alt="Imagen de carousel" width={100} height={100} className="text-4xl font-semibold w-full h-full obect-cover object-cover w-[100px] h-[100px]" />
 
                     </CarouselItem>
                 ))}

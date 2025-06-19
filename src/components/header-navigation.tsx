@@ -1,12 +1,33 @@
 "use client"
 
-import { useContext,  useState } from "react"
+import { createContext, ReactNode, useContext, useState } from "react"
 import Link from "next/link"
 import { Search, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProductContext } from "./products"
+import { CartSheet } from "./cart-sheet"
+import { ProductType } from "@/types/product-type"
+import { CartContext } from "@/types/context-types"
 
-export default function HomeHeader({ isHome }: { isHome: boolean }) {
+export const CartProctContext = createContext({} as CartContext);
+
+export function ProductsCartProvider({ children }: { children: ReactNode }) {
+  const [productsCartState, setproductsCartState] = useState([] as ProductType[])
+    const [CartLen, setCartLen] = useState(0)
+
+  return (
+    <CartProctContext.Provider value={{
+      productsCartState,
+      setproductsCartState,
+      CartLen, 
+      setCartLen
+    }}>
+      {children}
+    </CartProctContext.Provider>
+  );
+}
+
+export default function Header({ isHome }: { isHome: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { setChangeProducts, featuredProducts } = useContext(ProductContext)
 
@@ -50,6 +71,7 @@ export default function HomeHeader({ isHome }: { isHome: boolean }) {
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
             </div>
 
+            <CartSheet />
           </div>
 
           <div className="md:hidden flex items-center">
@@ -74,7 +96,7 @@ export default function HomeHeader({ isHome }: { isHome: boolean }) {
 
             </div>
             <nav className="flex flex-col space-y-4">
-              <Link href="/"  className={isHome ? "text-navy-blue border-b-2 border-navy-blue font-medium" : "text-gray-700 hover:text-navy-blue font-medium"}>
+              <Link href="/" className={isHome ? "text-navy-blue border-b-2 border-navy-blue font-medium" : "text-gray-700 hover:text-navy-blue font-medium"}>
                 Home
               </Link>
               <Link href="/#productos" className={isHome ? "text-gray-700 hover:text-navy-blue font-medium" : "text-navy-blue border-b-2 border-navy-blue font-medium"}>
@@ -84,6 +106,10 @@ export default function HomeHeader({ isHome }: { isHome: boolean }) {
               <Link href="/#about" className="text-gray-700 hover:text-navy-blue font-medium">
                 About
               </Link>
+              <div className="text-gray-700 hover:text-navy-blue font-medium text-start">
+
+                <CartSheet />
+              </div>
             </nav>
           </div>
         )}

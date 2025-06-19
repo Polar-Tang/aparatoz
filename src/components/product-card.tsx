@@ -4,8 +4,12 @@ import Image from "next/image"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { ProductType } from "@/types/product-type"
 import Link from "next/link"
+import AddCartButton from "./add-cart-button"
+
 
 export default function ProductCard({product}: {product: ProductType}) {
+
+
   return (
     <Card className="w-full max-w-[240px] overflow-hidden border-none shadow-none flex align-center justify-center" >
       <CardContent className="p-4 flex flex-col items-center">
@@ -38,8 +42,11 @@ export default function ProductCard({product}: {product: ProductType}) {
         </div>
       </CardContent>
 
-      <CardFooter className="rounded-full bg-pink-600 flex items-center align-center justify-center">
-        <Link href={`/productos/${product.id}`} className="w-full bg-navy-blue hover:bg-navy-blue/90 text-white rounded-full flex items-center align-center justify-center">Ver detalle</Link>
+      <CardFooter className="grid grid-col grid-rows-2  ">
+        <AddCartButton 
+        classname="w-full rounded-full bg-indigo-900 text-white rounded-full flex items-center align-center justify-center text-lg" 
+        id={product.id} />
+        <Link href={`/productos/${product.id}`} className="w-full rounded-full bg-pink-600 text-white rounded-full flex items-center align-center justify-center text-lg">Ver detalle</Link>
       </CardFooter>
     </Card>
   )

@@ -24,7 +24,10 @@ export function CarouselDemo() {
             <div className="">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-0">
-                  <Image src={image ? image : "/placeholder_im.png" } alt="Imagen de carousel" width={100} height={100} className="text-4xl font-semibold w-full h-full obect-cover object-fit w-[100px] h-[100px]"/>
+                  <Image src={image ? image : "/placeholder_im.png" } alt="Imagen de carousel" width={100} height={100} 
+                  className="text-4xl font-semibold w-full h-full object-cover"
+                  unoptimized
+                  />
                 </CardContent>
               </Card>
             </div>
