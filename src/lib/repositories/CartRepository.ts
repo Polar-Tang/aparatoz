@@ -9,7 +9,7 @@ import {
 
 export class CartRepository {
   // Create a new cart session with expiry
-  async createCart(sessionId: string, userId: number | null = null, expiryDays: number = 30): Promise<Cart> {
+  async createCart(sessionId: string, userId: number | null = null, expiryDays: number = 10): Promise<Cart> {
     const query = `
       INSERT INTO carts (session_id, user_id, created_at, updated_at, expires_at)
       VALUES ($1, $2, NOW(), NOW(), NOW() + INTERVAL '${expiryDays} days')
@@ -46,7 +46,7 @@ export class CartRepository {
   ): Promise<CartItem> {
     const query = `
       INSERT INTO cart_items (cart_id, product_id, quantity)
-      VALUES ($1, $2, $3, $4)
+      VALUES ($1, $2, $3)
       ON CONFLICT (cart_id, product_id)
       DO UPDATE SET quantity = cart_items.quantity + $3
       RETURNING *

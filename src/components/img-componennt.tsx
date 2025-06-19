@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import { X } from "lucide-react"
+import Image from "next/image"
 
 interface ImgComponentProps {
   src: string
@@ -107,7 +108,7 @@ export default function ImgComponent({
 
   return (
     <>
-      <img
+      <Image
         src={src || "/placeholder.svg"}
         alt={alt}
         width={width}

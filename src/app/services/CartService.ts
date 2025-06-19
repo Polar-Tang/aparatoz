@@ -10,6 +10,16 @@ export class CartService {
         this.cartRepository = new CartRepository();
     }
 
+    async getCart(sessionId: string, userId?: number | null): Promise<Cart | null> {
+        let cart = await this.cartRepository.getCartBySession(sessionId);
+
+        if (!cart) {
+            return null
+        }
+
+        return cart;
+    }
+
     // Get or create cart for session
     async getOrCreateCart(sessionId: string, userId?: number | null): Promise<Cart> {
         let cart = await this.cartRepository.getCartBySession(sessionId);

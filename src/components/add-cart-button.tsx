@@ -25,7 +25,7 @@ const AddCartButton = ({ id, classname }: { id: number, classname: string }) => 
                 })
                 throw new Error("Producto no encontrado")
             }
-            await fetch(`/api/cart`, {
+            const data = await fetch(`/api/cart`, {
                 method: 'POST',
                 credentials: "include",
                 headers: {
@@ -33,13 +33,14 @@ const AddCartButton = ({ id, classname }: { id: number, classname: string }) => 
                 },
                 body: JSON.stringify({ productId: id, quantity: 1 })
             })
-
             // GET BODY
             const cartStorageString = localStorage.getItem('cart')
-            if (cartStorageString) {
+            console.log("The item from the storage: ", cartStorageString)
+            if (cartStorageString && data.ok) {
                 const cartStorage = JSON.parse(cartStorageString)
                 cartStorage.push(product)
-                localStorage.setItem("cart", cartStorage)
+                console.log("Cart storega: ", cartStorage)
+                localStorage.setItem("cart", JSON.stringify(cartStorage))
 
                 setproductsCartState(cartStorage)
                 toast(`${product?.title} añadido`, {
@@ -49,10 +50,10 @@ const AddCartButton = ({ id, classname }: { id: number, classname: string }) => 
                         onClick: () => console.log("Añadido"),
                     },
                 })
-                setCartLen(1)
+                setCartLen(cartStorage.length)
                 return
-            } else if (!cartStorageString) {
-                
+            } else if (!cartStorageString && data.ok) {
+
                 const cartStorage: ProductType[] = []
                 cartStorage.push(product)
                 localStorage.setItem("cart", JSON.stringify(cartStorage))
@@ -65,8 +66,18 @@ const AddCartButton = ({ id, classname }: { id: number, classname: string }) => 
                         onClick: () => console.log("Añadido"),
                     },
                 })
-                setCartLen(1)
+                setCartLen(cartStorage.length)
+
                 return
+            } else {
+
+                toast("Ocurrió un error", {
+                    description: `No podemos añadir ${product?.title} en este momento`,
+                    action: {
+                        label: "Cerrar",
+                        onClick: () => console.log("Cerrar"),
+                    },
+                })
             }
         } catch (err) {
             console.log(err)
