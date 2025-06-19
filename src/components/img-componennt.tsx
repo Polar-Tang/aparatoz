@@ -95,9 +95,11 @@ export default function ImgComponent({
           >
             <X className="h-6 w-6" />
           </button>
-          <img
+          <Image
             src={src || "/placeholder.svg"}
             alt={alt}
+            width={100}
+            height={100}
             className={`max-h-[85vh] max-w-[85vw] rounded-lg object-contain ${imageClassName}`}
           />
         </div>

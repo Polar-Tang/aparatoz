@@ -36,7 +36,7 @@ export function CartSheet() {
         }
         console.log("The response frfom trhe backend ", res)
         const items = res.item as CartItem[]
-        let productsCart: ProductType[] = []
+        const productsCart: ProductType[] = []
         if (items) {
             items.forEach((productCart, i) => {
                 const product = featuredProducts.find((p) => p.id === productCart.product_id)

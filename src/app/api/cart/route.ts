@@ -101,7 +101,7 @@ export async function DELETE(req: NextRequest) {
 
         const cartService = new CartService()
         const cookieStore = await cookies();
-        let sessionId = cookieStore.get('cart_session')?.value;
+        const sessionId = cookieStore.get('cart_session')?.value;
 
         if (!sessionId) {
 
@@ -138,7 +138,7 @@ export async function DELETE(req: NextRequest) {
 
 export async function GET() {
     const cookieStore = await cookies();
-    let sessionId = cookieStore.get('cart_session')?.value;
+    const sessionId = cookieStore.get('cart_session')?.value;
 
     if (!sessionId) {
 
