@@ -7,12 +7,17 @@ import { Input } from "@/components/ui/input"
 import React from "react"
 
 export default function Footer() {
-    const [isEditing, setIsEditing] = React.useState<boolean>(false)
+  const [isEditing, setIsEditing] = React.useState<boolean>(false)
+  // const [storedText, setstoredText] = React.useState(second)
+  const [justifyText, setjustifyText] = React.useState("Providing the best products for your pets since 2010. Quality products for happy pets and happy owners.")
+  if (typeof window !== 'undefined') {
     const stored = localStorage.getItem("footerText")
-    console.log("This is the stored footer text", stored)
-    const [justifyText, setjustifyText] = React.useState(stored || "Providing the best products for your pets since 2010. Quality products for happy pets and happy owners.")
-    function handleSave() {
-      localStorage.setItem("footerText", String(justifyText))
+    if (stored) {
+      setjustifyText(stored)
+    }
+  }
+  function handleSave() {
+    localStorage.setItem("footerText", String(justifyText))
 
     setIsEditing(false)
   }
@@ -39,7 +44,7 @@ export default function Footer() {
             ) : (
               <>
                 <p className="mb-4">
-                  { stored ? stored : justifyText }
+                  {justifyText}
                 </p>
                 <button
                   className="ml-2 px-2 py-1 bg-blue-500 text-white rounded"
