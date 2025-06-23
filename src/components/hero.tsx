@@ -49,7 +49,7 @@ export default function Hero() {
             {isEditing.title ? (
               <>
                 <textarea
-                  className="text-3xl font-bold text-gray-900 mb-4 w-full"
+                  className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight"
                   value={herodataState.title}
                   onChange={e => handleBenefitChange("title", e.target.value)}
                 />
@@ -77,7 +77,7 @@ export default function Hero() {
             {isEditing.description ? (
               <>
                 <textarea
-                  className="text-3xl font-bold text-gray-900 mb-4 w-full"
+                  className="text-lg text-gray-600"
                   value={herodataState.description}
                   onChange={e => handleBenefitChange("description", e.target.value)}
                 />

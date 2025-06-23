@@ -88,7 +88,7 @@ export default function Testimonials() {
             {isEditing.title ? (
               <>
                 <textarea
-                  className="text-3xl font-bold text-gray-900 mb-4 w-full"
+                  className="text-3xl font-bold text-gray-900 mb-4"
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                 />

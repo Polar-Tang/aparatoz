@@ -100,6 +100,34 @@ export default function BenefitsSection() {
                 {benefit.icon}
               </div>
               <div className="max-w-xs">
+                {isEditing[`title${index}`] ? (
+                  <>
+
+                    <textarea
+                      className="text-gray-100 text-xl font-bold"
+                      value={benefit.title}
+                      onChange={e => handleBenefitChange(index, 'title', e.target.value)}
+                    />
+                    <button
+                      className="ml-2 px-2 py-1 bg-green-500 text-white rounded"
+                      onClick={() => handleSave(`title${index}`)}
+                    >
+                      Save
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="text-gray-100 text-xl font-bold">
+                      {benefit.title}
+                    </h3>
+                    <button
+                      className="ml-2 px-2 py-1 bg-blue-500 text-white rounded"
+                      onClick={() => setIsEditing(s => ({ ...s, [`title${index}`]: true }))}
+                    >
+                      Edit
+                    </button>
+                  </>
+                )}
                 {isEditing[`description${index}`] ? (
                   <>
 
