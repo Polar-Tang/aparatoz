@@ -59,27 +59,17 @@ export default function BenefitsSection() {
   const [benefitState, setbenefitState] = React.useState<Benefit[]>([])
 
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("benefitState")
-      if (stored) {
-        setbenefitState(JSON.parse(stored))
-      } else {
-        setbenefitState(benefits)
-      }
+     if (typeof window !== "undefined") {
+      localStorage.setItem("testimonialsState", JSON.stringify(benefitState))
     }
-  }, [benefits]) // Watch benefits for changes
+  }, [benefitState]) // Watch benefits for changes
   function handleSave(key: string) {
     setIsEditing(s => ({ ...s, [key]: false }))
   }
 
   function handleBenefitChange(index: number, field: string, value: string) {
-    console.log(benefitState[index].description, value)
     setbenefitState(s =>
-      s.map((t, i) => {
-        console.log("equasl", t.description)
-        return i === index ? { ...t, [field]: value } : t
-      }
-      )
+      s.map((t, i) => (i === index ? { ...t, [field]: value } : t))
     )
   }
   return (
@@ -102,7 +92,6 @@ export default function BenefitsSection() {
               <div className="max-w-xs">
                 {isEditing[`title${index}`] ? (
                   <>
-
                     <textarea
                       className="text-gray-100 text-xl font-bold"
                       value={benefit.title}

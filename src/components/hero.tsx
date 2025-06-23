@@ -36,7 +36,11 @@ export default function Hero() {
   function handleSave(key: string) {
     setIsEditing(s => ({ ...s, [key]: false }))
   }
-
+  React.useEffect(() => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("herodata", JSON.stringify(herodataState))
+      }
+    }, [herodataState])
   function handleBenefitChange(field: string, value: string) {
     console.log(value)
     setherodataState(s => ({ ...s, [field]: value }))

@@ -1,18 +1,54 @@
+"use client"
+
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import React from "react"
 
 export default function Footer() {
+    const [isEditing, setIsEditing] = React.useState<boolean>(false)
+    const stored = localStorage.getItem("footerText")
+    console.log("This is the stored footer text", stored)
+    const [justifyText, setjustifyText] = React.useState(stored || "Providing the best products for your pets since 2010. Quality products for happy pets and happy owners.")
+    function handleSave() {
+      localStorage.setItem("footerText", String(justifyText))
+
+    setIsEditing(false)
+  }
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-white text-lg font-bold mb-4">PetCare</h3>
-            <p className="mb-4">
-              Providing the best products for your pets since 2010. Quality products for happy pets and happy owners.
-            </p>
+            {isEditing ? (
+              <>
+                <textarea
+                  className=" mb-4"
+                  value={justifyText}
+                  onChange={e => setjustifyText(e.target.value)}
+                />
+                <button
+                  className="ml-2 px-2 py-1 bg-green-500 text-white rounded"
+                  onClick={() => handleSave()}
+                >
+                  Save
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="mb-4">
+                  { stored ? stored : justifyText }
+                </p>
+                <button
+                  className="ml-2 px-2 py-1 bg-blue-500 text-white rounded"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit
+                </button>
+              </>
+            )}
             <div className="flex space-x-4">
               <Link href="#" className="hover:text-white">
                 <Facebook className="h-5 w-5" />
